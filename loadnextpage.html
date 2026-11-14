@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+                            * {
+            /*margin: 10%;
+            margin-left: 10%;
+            margin-right: 10%;
+            margin-top: 10%;
+            margin-bottom: 10%;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif; */
+        }
+
+        body {
+            background-color: #555ab1;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+                    /* PWA Install Popup Styles */
+        #pwa-install-popup {
+            display: block;
+            position: fixed;
+            top: 35%;
+            left: 35%;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pwa-popup-content {
+            background: transparent;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px transparent;
+        }
+
+        .pwa-popup-content img {
+            width: 150px;
+            height: 150px;
+            margin: 1rem auto;
+            display: block;
+        }
+
+        .pwa-popup-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        .pwa-popup-buttons button {
+            flex: 1;
+            margin: 0 0.5rem;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .pwa-install-btn {
+            background: linear-gradient(135deg, #6b73ff, #000dff);
+            color: white;
+        }
+
+        .pwa-cancel-btn {
+            background: #f1f1f1;
+            color: #333;
+        }
+
+        .gif-container img {
+            max-width: 20%;
+            height: auto;
+            border-radius: 8px;
+        }
+        </style>
+    </head>
+    <body>
+            <!-- PWA Install Popup -->
+    <div id="pwa-install-popup">
+        <div class="pwa-popup-content">
+            <div class="gif-container">
+                <img src="assets/process.gif" alt="Authorization GIF" id="gifcontent">
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

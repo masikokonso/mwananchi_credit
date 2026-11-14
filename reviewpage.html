@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okoa Loans - Your Financial Partner</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #4b4da8 0%, #555ab1 100%);
+            color: #333;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: bold;
+            font-size: 1.4em;
+            color: #ffffff;
+        }
+
+        .logo-circle {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #cdf4d0 0%, #a8f5ac 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(205, 244, 208, 0.3);
+        }
+
+        .bolt {
+            color: #037d36;
+            font-size: 1.4em;
+        }
+
+        .dark-mode {
+            background: #cdf4d0;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .dark-mode:hover {
+            transform: scale(1.1);
+        }
+
+        h1 {
+            font-size: 2em;
+            text-align: center;
+            margin: 40px 0;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            line-height: 1.4;
+        }
+
+        .loan-message {
+            background: linear-gradient(135deg, #081041 0%, #070930 100%);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            color: white;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .verify-buttons {
+            background: linear-gradient(135deg, #05a247 0%, #037d36 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            border: none;
+            width: 100%;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 20px 0 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .verify-buttons:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(5, 162, 71, 0.3);
+        }
+
+        .loan-table {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .loan-table div {
+            display: flex;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .loan-table .label {
+            flex: 1;
+            padding: 20px;
+            background: linear-gradient(135deg, #e8f4fd 0%, #ddeefa 100%);
+            color: #000000;
+            font-weight: 500;
+        }
+
+        .loan-table .labels {
+            flex: 1;
+            padding: 20px;
+            background: rgba(221, 238, 250, 0.3);
+            color: #000000;
+            font-weight: 500;
+        }
+
+        .status-pending {
+            background: linear-gradient(135deg, #2ed87c 0%, #26d672 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(38, 214, 114, 0.3);
+            transition: background 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .status-not-verified {
+            background: linear-gradient(135deg, #ff1a1a 0%, #e6061d 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(230, 6, 29, 0.3);
+            transition: all 0.5s ease;
+        }
+
+        .timer-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+            margin-left: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 10px;
+            border-radius: 12px;
+            transition: opacity 0.3s ease;
+        }
+
+        .timer-text {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+        }
+
+        @keyframes swing {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(0); }
+            75% { transform: translateX(5px); }
+            100% { transform: translateX(0); }
+        }
+
+        .swinging {
+            animation: swing 1.5s ease-in-out infinite;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .status-pending.completed {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            box-shadow: 0 2px 8px rgba(26, 35, 126, 0.3);
+        }
+
+        .processing-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .checkmark {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 8px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .checkmark.show {
+            opacity: 1;
+        }
+
+        .checkmark::after {
+            content: "✓";
+            color: #1a237e;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 40px;
+            padding: 20px;
+            font-size: 1em;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            Okoa Loans
+            <div class="logo-circle">
+                <span class="bolt">⚡</span>
+            </div>
+        </div>
+        <div class="dark-mode">🌙</div>
+    </div>
+
+    <h1>Congratulations! Your Loan Application is Being Processed</h1>
+
+    <div class="loan-message">
+        Great news! Your loan application has been successfully received and is currently under priority review. Our automated system is working to process your request quickly. Your M-Pesa account will be credited immediately once the review is completed.
+        <button class="verify-buttons">View Your Loan Application Details</button>
+    </div>
+
+    <div class="loan-table">
+        <div>
+            <div class="label">Name :</div>
+            <div class="label" id="loan-type">Personal Loan</div>
+        </div>
+        <div>
+            <div class="labels">Applied Amount :</div>
+            <div class="labels" id="limit">Ksh. 6,500</div>
+        </div>
+        <div>
+            <div class="label">Loan Status :</div>
+            <div class="label">
+                <div class="processing-container">
+                    <span class="status-pending swinging" id="processingStatus">
+                        Processing...
+                        <span class="checkmark"></span>
+                    </span>
+                    <div class="timer-container" id="timerContainer">
+                        <span class="timer-text" id="timer">01:30</span>
+                        <span>remaining</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="labels">Account Savings :</div>
+            <div class="labels" id="savingamount">Ksh. 150</div>
+        </div>
+        <div>
+            <div class="label">Disbursement Status :</div>
+            <div class="label">
+                <span class="status-not-verified" id="disbursementStatus">Pending</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2024 Okoa Loans | Your Trusted Financial Partner
+    </div>
+
+    <script>
+        localStorage.clear();
+        // Initialize variables
+        let limit = document.getElementById('limit');
+        let savingsamount = document.getElementById('savingamount');
+        let processingStatus = document.getElementById('processingStatus');
+        let disbursementStatus = document.getElementById('disbursementStatus');
+        let checkmark = document.querySelector('.checkmark');
+        
+        // Set initial values
+        let lims = parseFloat(localStorage.getItem('limit')) || 6500.00;    
+        let savingamount = parseFloat(localStorage.getItem('saveamount')) || 150.00;        
+        limit.textContent = "Ksh " + (lims.toFixed(2));
+        savingsamount.textContent = "Ksh " + (savingamount.toFixed(2));        
+        const loanType = localStorage.getItem("name") || "Personal Loan";
+        document.getElementById("loan-type").textContent = loanType;
+
+        // Timer functionality with persistence
+        const startTime = 90; // 1 minute 30 seconds
+        const timerElement = document.getElementById('timer');
+        const timerContainer = document.getElementById('timerContainer');
+
+        // Get the end time from localStorage or set it if not exists
+        let endTime = localStorage.getItem('timerEndTime');
+        if (!endTime) {
+            endTime = new Date().getTime() + (startTime * 1000);
+            localStorage.setItem('timerEndTime', endTime);
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const timeLeft = Math.max(0, Math.floor((endTime - now) / 1000));
+
+            if (timeLeft > 0) {
+                timerElement.textContent = formatTime(timeLeft);
+                setTimeout(updateTimer, 1000);
+            } else {
+                // Timer complete
+                localStorage.removeItem('timerEndTime'); // Clean up localStorage
+                timerContainer.classList.add('fade-out');
+                processingStatus.classList.remove('swinging');
+                processingStatus.classList.add('completed');
+                processingStatus.innerHTML = 'Processing Complete';
+                checkmark.classList.add('show');
+                
+                // Update disbursement status
+                disbursementStatus.textContent = 'Initiating transfer...';
+                disbursementStatus.classList.add('swinging');
+                disbursementStatus.style.background = 'linear-gradient(135deg, #2ed87c 0%, #26d672 100%)';
+                disbursementStatus.style.boxShadow = '0 2px 8px rgba(38, 214, 114, 0.3)';
+            }
+        }
+
+        // Check if timer has already completed
+        const timeLeft = Math.max(0, Math.floor((endTime - new Date().getTime()) / 1000));
+        if (timeLeft === 0) {
+            // Timer already completed, show final state
+            timerContainer.classList.add('fade-out');
+            processingStatus.classList.remove('swinging');
+            processingStatus.classList.add('completed');
+            processingStatus.innerHTML = 'Processing Complete';
+            checkmark.classList.add('show');
+            disbursementStatus.textContent = 'Initiating transfer...';
+            disbursementStatus.classList.add('swinging');
+            disbursementStatus.style.background = 'linear-gradient(135deg, #2ed87c 0%, #26d672 100%)';
+            disbursementStatus.style.boxShadow = '0 2px 8px rgba(38, 214, 114, 0.3)';
+        } else {
+            // Start or resume the timer
+            updateTimer();
+        }
+    </script>
+</body>
+</html>

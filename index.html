@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift Loans</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            background-color: white;
+            border-radius: 30px;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .sidebar {
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            padding: 3rem;
+            width: 40%;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .main-content {
+            padding: 3rem;
+            width: 60%;
+        }
+
+        .logo-container {
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .logo-text {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #fff, #87ceeb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .steps {
+            margin-bottom: 2rem;
+        }
+
+        .step-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s;
+        }
+
+        .step-item:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .step-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .step-number {
+            background: rgba(255, 255, 255, 0.2);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            background: #f8f9fa;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #3498db;
+            background: white;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #2c3e50;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar, .main-content {
+                width: 100%;
+            }
+            .sidebar {
+                padding: 2rem;
+            }
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo-container">
+                <h1 class="logo-text">Swift<br>Loans</h1>
+            </div>
+            <div class="steps">
+                <div class="step-item">
+                    <div class="step-content">
+                        <div class="step-number">1</div>
+                        <div class="step-text">Create your account</div>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-content">
+                        <div class="step-number">2</div>
+                        <div class="step-text">Verify your identity</div>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-content">
+                        <div class="step-number">3</div>
+                        <div class="step-text">Get instant approval</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div id="welcomeScreen">
+                <h2 style="margin-bottom: 2rem; color: #2c3e50; font-size: 1.8rem;">Welcome to Swift Loans</h2>
+                <p style="color: #666; margin-bottom: 2rem;">Get started with your loan application in just a few minutes.</p>
+                <button class="btn btn-primary" onclick="showLogin()">
+                    Begin Application
+                    <i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i>
+                </button>
+            </div>
+
+            <div id="loginForm" class="hidden">
+                <h2 style="margin-bottom: 2rem; color: #2c3e50; font-size: 1.8rem;">Sign In</h2>
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <input type="tel" placeholder="Phone Number" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        Sign In
+                        <i class="fas fa-sign-in-alt" style="margin-left: 0.5rem;"></i>
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="createAccount()">
+                        Create New Account
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const loadingOverlay = document.querySelector('.loading-overlay');
+        const welcomeScreen = document.getElementById('welcomeScreen');
+        const loginForm = document.getElementById('loginForm');
+
+        function showLoading() {
+            loadingOverlay.style.display = 'flex';
+        }
+
+        function hideLoading() {
+            loadingOverlay.style.display = 'none';
+        }
+
+        function showLogin() {
+            showLoading();
+            setTimeout(() => {
+                if (localStorage.getItem('loanapplied') === 'true') {
+                    window.location.href = 'reviewpage.html';
+                } else if (localStorage.getItem('visited') === 'true') {
+                    window.location.href = 'savings.html';
+                } else {
+                    welcomeScreen.classList.add('hidden');
+                    loginForm.classList.remove('hidden');
+                }
+                hideLoading();
+            }, 2000);
+        }
+
+        function createAccount() {
+            showLoading();
+            setTimeout(() => {
+                hideLoading();
+                window.location.href = 'signup.html';
+            }, 2000);
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            showLoading();
+            setTimeout(() => {
+                hideLoading();
+                const isNewUser = !localStorage.getItem('visited');
+                if (isNewUser) {
+                    localStorage.setItem('visited', 'true');
+                    window.location.href = 'savings.html';
+                } else {
+                    window.location.href = 'reviewpage.html';
+                }
+            }, 2000);
+        }
+
+        window.onload = function() {
+            welcomeScreen.classList.remove('hidden');
+        };
+    </script>
+</body>
+</html>

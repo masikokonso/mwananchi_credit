@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload ID Image</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .containers {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 15%;
+            display: none;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .description {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        #uploadButton {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 16px;
+        }
+        #uploadButton:hover {
+            background-color: #2980b9;
+        }
+        #imagePreview {
+            max-width: 70%;
+            margin-top: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+        #imagePreviews {
+            max-width: 70%;
+            margin-top: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+        #fileInput {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="containers" id="containers">
+        <h1>Front of Your ID</h1>
+        <!--p class="descriptions">Your ID is needed to complete details verification
+        </p-->
+        <!--input type="file" id="fileInput" accept="image/*" capture="environment"-->
+        <!--button id="uploadButton">Upload Photo</button-->
+        <img id="imagePreviews" alt="Farm Image Previews">
+    </div>
+
+    <div class="container">
+        <img id="imagePreview" alt="Farm Image Preview">
+        <h1 id="back">Upload Front of Your ID</h1>
+        <p class="description">Your ID is needed to complete details verification
+        </p>
+        <input type="file" id="fileInput" accept="image/*" capture="environment">
+        <button id="uploadButton">Upload Photo</button>        
+    </div>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const uploadButton = document.getElementById('uploadButton');
+            const fileInput = document.getElementById('fileInput');
+            const imagePreview = document.getElementById('imagePreview');
+            const containers = document.getElementById('containers');
+            const back  = document.getElementById('back');
+
+            // Trigger file input when upload button is clicked containers
+            uploadButton.addEventListener('click', () => {
+                fileInput.click();
+            });
+
+            localStorage.clear();
+
+            // Handle file selection
+            fileInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    let added = localStorage.getItem('added');
+                    let last = localStorage.getItem('last');
+                    if (last) {
+                        imagePreview.style.display = 'none';
+                        imagePreviews.style.display = 'none';
+                        containers.style.display = 'none';
+                        uploadButton.textContent = "Upload ID";
+                        localStorage.clear();
+                    } else {
+
+                    if (!added) {
+
+                                            // Create a FileReader to display the image
+                    const reader = new FileReader();
+                    
+                    reader.onload = (e) => {
+                        imagePreviews.src = e.target.result;
+                        imagePreviews.style.display = 'block';
+                        
+                        // Simulate "saving" the image
+                        setTimeout(() => {
+                            //alert('Image uploaded successfully!');
+                            localStorage.setItem('added','added');
+                            containers.style.display = 'block';
+                            back.textContent = "Upload Back of Your ID";               
+                        }, 1000);
+                    };
+
+                    reader.readAsDataURL(file);
+
+                    } else {
+
+                // Create a FileReader to display the image
+                const reader = new FileReader();
+                
+                reader.onload = (e) => {                    
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+
+                    
+                    // Simulate "saving" the image
+                    setTimeout(() => {
+                        localStorage.setItem('last','last');
+                        uploadButton.textContent = "Re-Submit";
+                        localStorage.setItem('last','last');
+                        alert('Image uploaded successfully!');
+                    }, 1000);
+                };
+
+                reader.readAsDataURL(file);
+
+                    }
+                }
+
+                }
+            });
+
+            //-----------------------------------
+            
+        });
+    </script>
+
+</body>
+</html>

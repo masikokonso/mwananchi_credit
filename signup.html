@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okoa Loans</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f0f4f8;
+        }
+
+        .navbar {
+            background: #1a365d;
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #63b3ed;
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 6rem auto 2rem;
+            padding: 2rem 5%;
+        }
+
+        .hero-section {
+            padding: 4rem 0;
+        }
+
+        .hero-section h1 {
+            font-size: 4rem;
+            color: #1a365d;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .form-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section h2 {
+            color: #1a365d;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-section h3 {
+            color: #4a5568;
+            font-weight: normal;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #63b3ed;
+            box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.2);
+        }
+
+        button {
+            background: linear-gradient(135deg, #1a365d, #2b6cb0);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        .note {
+            text-align: center;
+            color: #4a5568;
+            margin-top: 1.5rem;
+        }
+
+        .disclaimer {
+            text-align: center;
+            color: #718096;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .disclaimer a {
+            color: #2b6cb0;
+            text-decoration: none;
+        }
+
+        footer {
+            background: #1a365d;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        footer a {
+            color: #63b3ed;
+            text-decoration: none;
+        }
+
+        @media (max-width: 968px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-section {
+                text-align: center;
+                padding: 2rem 0;
+            }
+
+            .hero-section h1 {
+                font-size: 3rem;
+            }
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 54, 93, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">Okoa Loans</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="hero-section">
+            <h1>Quick & Easy Loans</h1>
+            <p>Access flexible financing solutions tailored to your needs. Get instant loans up to Ksh. 50,000 directly to your M-PESA, with no CRB checks and no paperwork required.</p>
+        </div>
+
+        <div class="form-section">
+            <h2>Find Your Loan Eligibility</h2>
+            <h3>Loans from Ksh. 5,000 - 50,000 directly to M-PESA</h3>
+
+            <form id="loanForm">
+                <input type="text" id="names" placeholder="Your Full Name" required>
+                <select id="country" required>
+                    <option value="" disabled selected>Select County</option>
+                    <option value="mombasa">Mombasa</option>
+                    <option value="kwale">Kwale</option>
+                    <option value="kilifi">Kilifi</option>
+                    <!-- Add other counties as needed -->
+                </select>
+                <input type="tel" id="mpesas" placeholder="M-PESA Phone Number" required>
+                <input type="text" id="idNumber" placeholder="National ID Number" required>
+                <select id="loanType" required>
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                    <option value="other">Other</option>
+                </select>
+                <input type="text" id="DOB" placeholder="Date of Birth: dd/mm/yy" required>
+                <select id="maritalstatus" required>
+                    <option value="" disabled selected>Marital Status</option>
+                    <option value="single">Single</option>
+                    <option value="married">Married</option>
+                    <option value="divorced">Divorced</option>
+                </select>
+                <button type="submit">Continue Application</button>
+            </form>
+
+            <p class="note">✓ No CRB Check ✓ No Guarantors ✓ Instant M-PESA Transfer</p>
+            <p class="disclaimer">
+                By continuing, you agree to our <a href="#">Terms & Conditions</a> and
+                <a href="#">Privacy Policy</a>
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Okoa Loans. All rights reserved. <a href="index.html">Home</a></p>
+    </footer>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registered successfully');
+                    })
+                    .catch(error => {
+                        console.log('Service Worker registration failed');
+                    });
+            });
+        }
+
+        document.getElementById('loanForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const loadingOverlay = document.querySelector('.loading-overlay');
+            loadingOverlay.style.display = 'flex';
+            
+            // Simulate form submission
+            setTimeout(() => {
+                loadingOverlay.style.display = 'none';
+                window.location.href = 'next-page.html';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

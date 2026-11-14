@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okoa Loans Login Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f5f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        .logo {
+            margin-bottom: 20px;
+        }
+        .logo img {
+            width: 120px;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .login-btn:hover {
+            background-color: #0056b3;
+        }
+        .forgot-password {
+            margin-top: 15px;
+            display: block;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        .signup-link {
+            margin-top: 20px;
+            color: #333;
+        }
+        .social-login {
+            margin-top: 20px;
+        }
+        .social-login button {
+            width: 100%;
+            padding: 10px;
+            background-color: #dd4b39;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .social-login button.google {
+            background-color: #dd4b39;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <!--div class="logo">
+            <img src="https://www.paxful.com/favicon.ico" alt="Paxful Logo">
+    </div-->
+        <h2>Login to Your Account</h2>
+        <form>
+            <input type="email" placeholder="Email Address" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit" class="login-btn">Log In</button>
+            <a href="#" class="forgot-password">Forgot Password?</a>
+        </form>
+
+        <div class="signup-link">
+            Don't have an account? <a href="#">Sign Up</a>
+        </div>
+
+        <div class="social-login">
+            <button class="google">Log In with Google</button>
+        </div>
+    </div>
+    <script>
+        // Check if the user has already visited
+        if (localStorage.getItem('lnapplied') === 'true') {
+            // Redirect to second page
+            //localStorage.clear();
+            window.location.href = 'reviewpage.html';
+        }
+
+        if (localStorage.getItem('visited') === 'true') {
+            // Redirect to second page
+            //localStorage.clear();
+            window.location.href = 'reviewpage.html';
+        }
+
+        function goToSecondPage() {
+            // Set 'visited' flag in localStorage
+            localStorage.setItem('visited', 'true');
+            // Redirect to the second page
+            window.location.href = 'LoanApplication-details.html';
+        }
+    </script>
+</body>
+</html>
